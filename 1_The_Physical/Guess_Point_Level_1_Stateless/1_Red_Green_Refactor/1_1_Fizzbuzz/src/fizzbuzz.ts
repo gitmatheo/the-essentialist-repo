@@ -5,7 +5,7 @@ export function fizzBuzz(n: number): string {
     if(n > 100 || n < 1) {
         throw new Error("Number must be between 1 and 100");
     }
-    if (n % 15 === 0) {
+    if (n % 3 === 0 && n % 5 === 0) {
         return "FizzBuzz";
     }
     if (n % 3 === 0) {
