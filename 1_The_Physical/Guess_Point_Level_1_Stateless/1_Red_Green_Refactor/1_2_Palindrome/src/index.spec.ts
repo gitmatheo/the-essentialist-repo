@@ -6,6 +6,13 @@ describe('palindrome checker', () => {
         expect(typeof isPalindrome('mom')).toEqual('boolean')
     })
 
+    it('should throw an error if the input is not a string', () => {
+        const nonStrings = [1, 2, 3, 4, 5, true, false, null, undefined, [], {}];
+        nonStrings.forEach(nonString => {
+            expect(() => isPalindrome(nonString as any)).toThrowError('Input must be a string')
+        })
+    })
+
     it('should return true for a palindrome', () => {
         const palindroms = ['mom', 'dad', 'racecar', 'madam', 'level', 'noon', 'refer', 'rotator', 'sagas'];
         palindroms.forEach(palindrome => {
