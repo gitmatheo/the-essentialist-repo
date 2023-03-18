@@ -26,4 +26,11 @@ describe('palindrome checker', () => {
             expect(isPalindrome(palindrome)).toEqual(true)
         })
     })
+    
+    it('should detect palindromes in phrases like "Was It A Rat I Saw" and "Never Odd or Even" ', () => {
+        const palindroms = ['Was It A Rat I Saw', 'Never Odd or Even'];
+        palindroms.forEach(palindrome => {
+            expect(isPalindrome(palindrome)).toEqual(true)
+        })
+    })
 })
