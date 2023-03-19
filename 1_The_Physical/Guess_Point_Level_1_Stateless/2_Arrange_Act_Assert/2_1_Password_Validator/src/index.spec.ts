@@ -1,21 +1,62 @@
+import { isValidPassword } from "./index";
 
-import { validatePassword } from './index'
+describe("password validator", () => {
+  it("should return PasswordValidationResult on valid password", () => {
+    const validPassword = "Password1";
+    const result = isValidPassword(validPassword);
+    expect(result).toEqual({
+      isValid: true,
+      errors: [],
+    });
+  });
 
-describe('password validator', () => {
-    it('should return boolean', () => {
-        expect(validatePassword('')).toBe(true)
-    })
+  it("should return false if password is not between 5 and 15 characters long", () => {
+    const invalidPasswords = ["Super-long-Password-over-15-characters", "sHo1"];
 
-})
+    invalidPasswords.forEach((invalidPassword) => {
+      const result = isValidPassword(invalidPassword);
+      expect(result.isValid).toBe(false);
+      expect(result.errors).toContain(
+        "Password must be between 5 and 15 characters long."
+      );
+    });
+  });
 
+  it("should return false if password does not contain at least one digit", () => {
+    const invalidPassword = "WithoutDigit";
 
+    const result = isValidPassword(invalidPassword);
 
-// > Write a function (or a class) for validating passwords. Passwords must meet the following criteria: 
+    expect(result.isValid).toBe(false);
+    expect(result.errors).toContain(
+      "Password must contain at least one digit."
+    );
+  });
 
-// > Between 5 and 15 characters long
-// > Contains at least one digit
-// > Contains at least one upper case letter
+  it("should return false if password does not contain at least one upper case letter", () => {
+    const invalidPassword = "no1uppercase";
 
-// > Return an object containing a boolean result and an errors key that 
-//  — when provided with an invalid password 
-//  — contains an error message or type for all errors in occurrence. There can be multiple errors at a single time.
+    const result = isValidPassword(invalidPassword);
+
+    expect(result.isValid).toBe(false);
+    expect(result.errors).toContain(
+      "Password must contain at least one uppercase letter."
+    );
+  });
+
+  it("should contain all error messages", () => {
+    const errorMessages = [
+      "Password must be between 5 and 15 characters long.",
+      "Password must contain at least one digit.",
+      "Password must contain at least one uppercase letter.",
+    ];
+    const invalidPassword = "n";
+
+    const result = isValidPassword(invalidPassword);
+
+    expect(result.isValid).toBe(false);
+    errorMessages.forEach((errorMessage) => {
+      expect(result.errors).toContain(errorMessage);
+    });
+  });
+});
