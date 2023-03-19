@@ -1,7 +1,4 @@
-export interface PasswordValidationResult {
-  isValid: boolean;
-  errors: string[];
-}
+import { PasswordValidationResult } from "./passwordValidator.interface";
 
 export function isValidPassword(password: string): PasswordValidationResult {
   const errors: string[] = [];
