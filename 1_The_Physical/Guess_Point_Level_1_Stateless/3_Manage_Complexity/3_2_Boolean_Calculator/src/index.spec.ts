@@ -26,8 +26,8 @@ describe("boolean calculator", () => {
     expect(booleanCalculator("TRUE OR FALSE AND NOT FALSE")).toBe(true);
   });
 
-  // it("should handle parenthesis", () => {
-  //   expect(booleanCalculator("(TRUE OR TRUE OR TRUE) AND FALSE")).toBe(false);
-  //   expect(booleanCalculator("NOT (TRUE AND TRUE)")).toBe(false);
-  // });
+  it("should handle parenthesis", () => {
+    expect(booleanCalculator("(TRUE OR TRUE OR TRUE) AND FALSE")).toBe(false);
+    expect(booleanCalculator("NOT (TRUE AND TRUE)")).toBe(false);
+  });
 });
